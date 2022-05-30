@@ -1,0 +1,21 @@
+.wrapper {
+    margin: 0 100px;
+    margin-top: 10px;
+    display: grid;
+    background: #f5f7eb;
+    border-radius: 10px;
+
+    
+  grid-template-areas: 
+  "h h"
+  "n p";
+
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 1fr  10fr;
+  grid-gap: 10px;
+}
+
+.content{
+  grid-area: p;
+  border-radius: 10px;
+}

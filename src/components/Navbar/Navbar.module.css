@@ -1,0 +1,9 @@
+.navbar{
+    grid-area: n;
+    background: #a556f5;
+    padding: 20px;
+    
+    color: white;
+    border-radius: 10px;
+    height: auto;
+}
