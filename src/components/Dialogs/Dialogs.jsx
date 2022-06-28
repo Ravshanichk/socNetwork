@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useRef } from "react";
 import s from "./Dialogs.module.css";
 import DialogUser from "./DialogUser/DialogUser";
 import Message from "./Message/Message";
 
 const Dialogs = (props) => {
+
+  let newMessage = useRef();
+
+  let addMessage = () =>{
+    let text = newMessage.current.value;
+    alert(text)
+  }
   debugger
   return (
     <div>
@@ -28,7 +35,8 @@ const Dialogs = (props) => {
         </div>
       </div>
       <div>
-      <textarea></textarea>
+      <textarea ref={newMessage}></textarea>
+      <button onClick={addMessage}>Send message</button>
       </div>
    
     </div>
