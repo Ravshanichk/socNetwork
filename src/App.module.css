@@ -1,9 +1,9 @@
 .wrapper {
     margin: 0 100px;
-    margin-top: 10px;
     display: grid;
     background: #f5f7eb;
     border-radius: 10px;
+    height: 100vh;
 
     
   grid-template-areas: 
