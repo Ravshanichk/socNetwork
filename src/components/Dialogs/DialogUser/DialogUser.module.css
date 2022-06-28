@@ -1,0 +1,14 @@
+.dialogUser{
+    text-decoration: none;
+    
+}
+
+.dialogUser a{
+    color: black;
+    text-decoration: none;
+    
+}
+
+a.active {
+    color: gold;
+}

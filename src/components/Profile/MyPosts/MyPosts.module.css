@@ -1,0 +1,8 @@
+.myPosts{
+    margin-top: 5px;
+}
+
+.myPosts textarea {
+    border: none;
+    width: 10rem;
+}

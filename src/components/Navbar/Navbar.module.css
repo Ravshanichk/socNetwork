@@ -2,8 +2,30 @@
     grid-area: n;
     background: #a556f5;
     padding: 20px;
-    
-    color: white;
+
     border-radius: 10px;
     height: auto;
 }
+
+ .navbar ul {
+    padding-left: 0;
+  }
+
+  .navbar li {
+      list-style-type: none;
+      padding-bottom: 5px;
+      transition: transform 0.2s ease-in-out;
+  }
+
+  .navbar li:hover{
+      transform: translateX(+2px);
+  }
+
+  .navbar a{
+    color: white;
+    text-decoration: none;
+  }
+
+  .navbar a.active {
+    color:gold;
+  }

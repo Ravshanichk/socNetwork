@@ -1,0 +1,38 @@
+.dialogArea{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+
+.dialogItems{
+    padding: 0px 10px;
+}
+
+.dialogItems ul{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.dialogItems li{
+    padding-bottom: 2.5px;
+    
+}
+
+
+
+.messagesBlock{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    flex: 1;
+    border: 1px solid rgb(175, 174, 174) ;
+    margin: 0 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgb(246, 242, 204);
+}
+
+
+
+
