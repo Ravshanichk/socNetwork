@@ -11,7 +11,7 @@ const Navbar = () => {
     { route: "settings", name: "Settings" },
     { route: "users", name: "Users" },
   ];
-  console.log(s);
+  
   return (
     <nav className={s.navbar}>
       <ul>
@@ -28,6 +28,7 @@ const Navbar = () => {
           );
         })}
       </ul>
+      
     </nav>
   );
 };

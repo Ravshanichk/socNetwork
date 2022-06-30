@@ -5,4 +5,9 @@
 .myPosts textarea {
     border: none;
     width: 10rem;
+    width: 400px;
+}
+
+.myPosts textarea{
+    border-radius: 10px;
 }
