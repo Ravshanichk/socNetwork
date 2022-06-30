@@ -3,24 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { addPost, onChangeTextArea, subscribe } from './redux/state';
-import {addMessage} from './redux/state'
-import state from './redux/state';
-
-
+import store from './redux/state';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-let renderEntireTree =()=>{
-
-    root.render(
+let renderEntireTree =(state)=>{
+    
+     root.render(
   <BrowserRouter>
-    <App appState = {state} addPost={addPost} addMessage={addMessage} onChangeTextArea={onChangeTextArea}/>
+    <App state = {store.getState()} addPost={store.addPost.bind(store)} addMessage={store.addMessage.bind(store)} onChangeTextArea={store.onChangeTextArea.bind(store)}/>
   </BrowserRouter>
 );
 }
+
 renderEntireTree()
 
-subscribe(renderEntireTree)
+store.subscribe(renderEntireTree)
 
-export default renderEntireTree

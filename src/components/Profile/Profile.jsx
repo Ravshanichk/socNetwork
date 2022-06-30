@@ -5,7 +5,7 @@ import s from './Profile.module.css'
 
 
 const Profile = (props) =>{
-    
+    debugger
     return(
         <div className={s.profile}>
             <ProfileInfo/>
