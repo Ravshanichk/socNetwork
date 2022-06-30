@@ -1,4 +1,7 @@
-import renderEntireTree from "../render";
+
+let renderEntireTree = ()=> {
+  console.log("state changed")
+}
 
 let state = {
   profilePage: {
@@ -31,7 +34,7 @@ let state = {
   },
 };
 
-export let addPost = () => {
+export const addPost = () => {
   let newPost = {
     id: 4,
     message: state.profilePage.textArea,
@@ -42,7 +45,7 @@ export let addPost = () => {
   renderEntireTree(state);
 };
 
-export let addMessage = (newMessage) => {
+export const addMessage = (newMessage) => {
   let newMessageItem = {
     text: newMessage,
     id: 6,
@@ -51,10 +54,14 @@ export let addMessage = (newMessage) => {
   renderEntireTree(state);
 };
 
-export let onChangeTextArea = (newTextBalue) => {
-  state.profilePage.textArea = newTextBalue;
+export const onChangeTextArea = (newTextValue) => {
+  state.profilePage.textArea = newTextValue;
   renderEntireTree(state);
   
 };
+
+export const subscribe = (observer) => {
+  renderEntireTree = observer
+}
 
 export default state;
