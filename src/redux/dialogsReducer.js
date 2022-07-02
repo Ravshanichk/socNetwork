@@ -41,6 +41,6 @@ const dialogsReducer = (state=initialState, action) =>{
 }
 
 export const addMessageAC=()=>({type: ADD_MESSAGE});
-export const onCHangeTextAreaMessageAC=(text)=>({type: ON_CHANGE_TEXT_AREA_MESSAGE, body: text});
+export const updateNewMessageTextAC=(text)=>({type: ON_CHANGE_TEXT_AREA_MESSAGE, body: text});
 
 export default dialogsReducer

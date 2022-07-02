@@ -1,29 +1,21 @@
 import React, { useRef } from "react";
-import { addMessageAC, onCHangeTextAreaMessageAC } from "../../redux/dialogsReducer";
 import s from "./Dialogs.module.css";
 import DialogUser from "./DialogUser/DialogUser";
 import Message from "./Message/Message";
 
 const Dialogs = (props) => {
+  debugger
   let newMessage = useRef();
-  let dialogsItems = props.dialogsPage.dialogsItems.map((item) => {
-    return (
-      <li>
-        <DialogUser name={item.name} id={item.id} />
-      </li>
-    );
-  });
-  let messages = props.dialogsPage.messages.map((item) => {
-    return <Message message={item} />;
-  });
+  let dialogsItems = props.state.dialogsItems.map((item) => <li><DialogUser name={item.name} id={item.id} /></li>);
+  let messages = props.state.messages.map((item) =>  <Message message={item} />);
 
-  let addMessage = () => {
-    props.dispatch(addMessageAC());
+  let onSendMessageClick = () => {
+    props.addMessage();
   };
 
   let onChangeDialogsTextarea = () => {
     let text = newMessage.current.value;
-    props.dispatch(onCHangeTextAreaMessageAC(text));
+    props.onChangeDialogsTextarea(text);
   };
 
   return (
@@ -38,10 +30,10 @@ const Dialogs = (props) => {
         <textarea
           ref={newMessage}
           onChange={onChangeDialogsTextarea}
-          value={props.dialogsPage.textArea}
-          placeholder={props.dialogsPage.placeHolder}
+          value={props.state.textArea}
+          placeholder={props.state.placeHolder}
         ></textarea>
-        <button onClick={addMessage}>Send message</button>
+        <button onClick={onSendMessageClick}>Send message</button>
       </div>
     </div>
   );

@@ -37,6 +37,6 @@ const profileReducer = (state=initialState, action) => {
 }
 
 export const addPostAC =()=>({type: ADD_POST});
-export const onCHangeTextAreaPostAC=(text)=>({type: ON_CHANGE_TEXT_AREA_POST, body: text});
+export const updateNewPostTextAC=(text)=>({type: ON_CHANGE_TEXT_AREA_POST, body: text});
 
 export default profileReducer
