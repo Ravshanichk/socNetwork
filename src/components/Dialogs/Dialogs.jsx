@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { addMessageAC, onCHangeTextAreaMessageAC } from "../../redux/state";
+import { addMessageAC, onCHangeTextAreaMessageAC } from "../../redux/dialogsReducer";
 import s from "./Dialogs.module.css";
 import DialogUser from "./DialogUser/DialogUser";
 import Message from "./Message/Message";

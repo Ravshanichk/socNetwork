@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
-import { addPostAC, onCHangeTextAreaPostAC } from "../../../redux/state";
+import { addPostAC, onCHangeTextAreaPostAC } from "../../../redux/profileReducer";
 
 const MyPosts = (props) => {
 
