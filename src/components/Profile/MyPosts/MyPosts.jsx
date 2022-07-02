@@ -7,18 +7,18 @@ const MyPosts = (props) => {
   let newPostElement = useRef();
  
   let addPost = () =>{
-    props.addPost()
+    props.dispatch({type:"ADD-POST"})
   }
 
   let onChangeTextArea = () =>{
     let text = newPostElement.current.value;
-    props.onChangeTextArea(text);
+    props.dispatch({type:"ON-CHANGE-TEXT-AREA-POST", body: text});
   }
 
   return (
     <div className={s.myPosts}>
       <div>
-        <textarea ref={newPostElement} value={props.profilePage.textArea} onChange={onChangeTextArea} ></textarea>
+        <textarea ref={newPostElement} value={props.profilePage.textArea} placeholder={props.profilePage.placeHolder} onChange={onChangeTextArea} ></textarea>
       </div>
       <div>
         <button onClick={addPost} >Add post</button>

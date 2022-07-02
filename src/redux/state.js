@@ -1,6 +1,5 @@
-
 let store = {
-    _state : {
+  _state: {
     profilePage: {
       posts: [
         {
@@ -11,7 +10,8 @@ let store = {
         { id: 2, message: "YOU!", likeCount: 0 },
         { id: 3, message: "Just let it go", likeCount: 1 },
       ],
-      textArea: "well well",
+      textArea: "",
+      placeHolder: "Type your post",
     },
     dialogsPage: {
       messages: [
@@ -21,65 +21,65 @@ let store = {
         { text: "My daughter is going to America", id: 4 },
         { text: "You look like previous prime minister of Japan", id: 5 },
       ],
-  
+
       dialogsItems: [
         { name: "Stein", id: 1 },
         { name: "Akira", id: 2 },
         { name: "Husein", id: 3 },
         { name: "Salt", id: 4 },
       ],
+      placeHolder: "Type your message",
+      textArea: "",
     },
   },
   // _callSubscriber функция которая принимает все функцию из вне (subscribe(observer)) и вызывает ее
-  _callSubscriber (){
-    console.log("state changed")
+  _callSubscriber() {
+    console.log("state changed");
+  },
+  // subscribe функция подписвания функции из вне (callback)
+  subscribe(observer) {
+    this._callSubscriber = observer;
   },
 
-  getState(){
+  getState() {
     return this._state;
   },
 
-  addPost(){
-    let newPost = {
-      id: 4,
-      message: this._state.profilePage.textArea,
-      likeCount: 10,
-    };
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.textArea = " ";
-    this._callSubscriber(this.getState);
+  dispatch(action) {
+    if (action.type === "ADD-POST") {
+      debugger
+      let newPost = {
+        id: 4,
+        message: this._state.profilePage.textArea,
+        likeCount: 10,
+      };
+      this._state.profilePage.posts.push(newPost);
+      this._state.profilePage.textArea = "";
+      this._callSubscriber(this.getState());
+    }
+    if (action.type === "ADD-MESSAGE") {
+      debugger;
+      let newMessageItem = {
+        text: this._state.dialogsPage.textArea,
+        id: 6,
+      };
+      this._state.dialogsPage.messages.push(newMessageItem);
+      this._state.dialogsPage.textArea = " ";
+      this._callSubscriber(this.getState());
+    }
+    if (action.type === "ON-CHANGE-TEXT-AREA-POST") {
+      debugger;
+      this._state.profilePage.textArea = action.body;
+      this._callSubscriber(this.getState());
+    }
+    if (action.type === "ON-CHANGE-TEXT-AREA-MESSAGE") {
+      debugger;
+      this._state.dialogsPage.textArea = action.body;
+      this._callSubscriber(this.getState());
+    }
   },
+};
 
-  addMessage(newMessage){
-    let newMessageItem = {
-      text: newMessage,
-      id: 6,
-    };
-    this._state.dialogsPage.messages.push(newMessageItem);
-    this._callSubscriber(this.getState);
-  },
-
-  
-onChangeTextArea(newTextValue){
-  this._state.profilePage.textArea = newTextValue;
-  this._callSubscriber(this.getState);
-  
-},
-
-  // subscribe функция подписвания функции из вне (callback)
-  subscribe(observer){
-  this._callSubscriber = observer
-}
-
-}
-
-
-
-
-window.store = store
-
-
-
-
+window.store = store;
 
 export default store;

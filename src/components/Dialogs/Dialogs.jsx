@@ -8,9 +8,13 @@ const Dialogs = (props) => {
   let newMessage = useRef();
 
   let addMessage = () =>{
+    props.dispatch({type:"ADD-MESSAGE"});
+
+  }
+
+  let onChangeDialogsTextarea = () => {
     let text = newMessage.current.value;
-    props.addMessage(text);
-    newMessage.current.value=" "
+    props.dispatch({type: "ON-CHANGE-TEXT-AREA-MESSAGE", body: text})
   }
  
   return (
@@ -18,7 +22,7 @@ const Dialogs = (props) => {
       <div className={s.dialogArea}>
         <div className={s.dialogItems}>
           <ul>
-            {props.dialogItems.map((item) => {
+            {props.dialogsPage.dialogsItems.map((item) => {
               return (
                 <li>
                   <DialogUser name={item.name} id={item.id} />
@@ -28,7 +32,7 @@ const Dialogs = (props) => {
           </ul>
         </div>
         <div className={s.messagesBlock}>
-          {props.messages.map((item) => {
+          {props.dialogsPage.messages.map((item) => {
             return (
                 <Message message={item}/>
             );
@@ -36,7 +40,7 @@ const Dialogs = (props) => {
         </div>
       </div>
       <div>
-      <textarea ref={newMessage}></textarea>
+      <textarea ref={newMessage} onChange={onChangeDialogsTextarea} value={props.dialogsPage.textArea} placeholder={props.dialogsPage.placeHolder}></textarea>
       <button onClick={addMessage}>Send message</button>
       </div>
    

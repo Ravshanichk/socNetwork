@@ -5,11 +5,11 @@ import s from './Profile.module.css'
 
 
 const Profile = (props) =>{
-    debugger
+
     return(
         <div className={s.profile}>
             <ProfileInfo/>
-            <MyPosts profilePage={props.profilePage} addPost={props.addPost} onChangeTextArea={props.onChangeTextArea}></MyPosts>
+            <MyPosts profilePage={props.profilePage} dispatch={props.dispatch} ></MyPosts>
         </div>
     )
 }
