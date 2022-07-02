@@ -1,3 +1,11 @@
+import dialogsReducer from "./dialogsReducer";
+import profileReducer from "./profileReducer";
+
+const ADD_POST = 'ADD-POST';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const ON_CHANGE_TEXT_AREA_POST ='ON-CHANGE-TEXT-AREA-POST';
+const ON_CHANGE_TEXT_AREA_MESSAGE ='ON-CHANGE-TEXT-AREA-MESSAGE';
+
 let store = {
   _state: {
     profilePage: {
@@ -46,39 +54,20 @@ let store = {
   },
 
   dispatch(action) {
-    if (action.type === "ADD-POST") {
-      debugger
-      let newPost = {
-        id: 4,
-        message: this._state.profilePage.textArea,
-        likeCount: 10,
-      };
-      this._state.profilePage.posts.push(newPost);
-      this._state.profilePage.textArea = "";
+    debugger
+      this._state.profilePage = profileReducer(this._state.profilePage, action);
+      this._state.dialogsReducer = dialogsReducer(this._state.dialogsPage, action);
+
       this._callSubscriber(this.getState());
-    }
-    if (action.type === "ADD-MESSAGE") {
-      debugger;
-      let newMessageItem = {
-        text: this._state.dialogsPage.textArea,
-        id: 6,
-      };
-      this._state.dialogsPage.messages.push(newMessageItem);
-      this._state.dialogsPage.textArea = " ";
-      this._callSubscriber(this.getState());
-    }
-    if (action.type === "ON-CHANGE-TEXT-AREA-POST") {
-      debugger;
-      this._state.profilePage.textArea = action.body;
-      this._callSubscriber(this.getState());
-    }
-    if (action.type === "ON-CHANGE-TEXT-AREA-MESSAGE") {
-      debugger;
-      this._state.dialogsPage.textArea = action.body;
-      this._callSubscriber(this.getState());
-    }
+
   },
 };
+
+export const addPostAC =()=>({type: ADD_POST});
+export const addMessageAC=()=>({type: ADD_MESSAGE});
+export const onCHangeTextAreaPostAC=(text)=>({type: ON_CHANGE_TEXT_AREA_POST, body: text});
+export const onCHangeTextAreaMessageAC=(text)=>({type: ON_CHANGE_TEXT_AREA_MESSAGE, body: text});
+
 
 window.store = store;
 

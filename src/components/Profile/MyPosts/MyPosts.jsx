@@ -1,18 +1,20 @@
 import React, { useRef } from "react";
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
+import { addPostAC, onCHangeTextAreaPostAC } from "../../../redux/state";
 
 const MyPosts = (props) => {
 
   let newPostElement = useRef();
  
   let addPost = () =>{
-    props.dispatch({type:"ADD-POST"})
+    props.dispatch(addPostAC())
   }
 
   let onChangeTextArea = () =>{
+    debugger
     let text = newPostElement.current.value;
-    props.dispatch({type:"ON-CHANGE-TEXT-AREA-POST", body: text});
+    props.dispatch(onCHangeTextAreaPostAC(text));
   }
 
   return (
