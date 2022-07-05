@@ -4,6 +4,7 @@ const SET_USERS = "SET-USERS"
 const SET_PAGE = "SET-PAGE"
 const SET_TOTAL_USERS = "SET-TOTAL-USERS"
 const SET_SEARCH_INPUT = "SET-SEARCH-INPUT"
+const SET_FETCH = "SET-FETCH"
 
 
 let initialState ={
@@ -19,6 +20,7 @@ let initialState ={
     totalUsersCount: 1000,
     searchInputText: "",
     term: "",
+    isFetching: true,
 }
 
 const usersReducer = (state=initialState, action) =>{
@@ -65,6 +67,11 @@ const usersReducer = (state=initialState, action) =>{
                     ...state,
                     searchInputText: action.body
                 }
+            case SET_FETCH:
+                return{
+                    ...state,
+                    isFetching: action.fetching
+                }
         default:
             return state;
     }
@@ -76,6 +83,7 @@ export const setUsersAC=(users)=>({type: SET_USERS, body: users})
 export const setCurrentPageAC=(page) => ({type: SET_PAGE, body: page})
 export const setTotalUsersCountAC=(totalUsersCount) => ({type: SET_TOTAL_USERS, body: totalUsersCount})
 export const setSearchInputAC=(text) => ({type: SET_SEARCH_INPUT, body: text})
+export const setFetchingAC=(fetching) => ({type: SET_FETCH, fetching})
 
 
 export default usersReducer

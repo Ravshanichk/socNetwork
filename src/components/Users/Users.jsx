@@ -1,10 +1,11 @@
 import React from "react";
 import { useRef } from "react";
+import Preloader from "../common/Preloader/Preloader";
 import User from "./User/User";
 import s from "./Users.module.css";
 
 const Users=(props)=> {
-  debugger
+
   let pagesCount = Math.ceil(
     props.usersPage.totalUsersCount / props.usersPage.pageSize
   );
@@ -39,29 +40,32 @@ const Users=(props)=> {
 
     return (
       <div className={s.usersBlock}>
-        <div className={s.pageBlock}>
-          {pages.map((page) => (
-            <span
-              className={currentPage === page ? s.selectedPage : s.page}
-              onClick={() => {
-                onPageChanged(page);
-              }}
-            >
-              {page}
-            </span>
-          ))}
-        </div>
-        <div className={s.searchBlock}>
-          <input
-            ref={searchText}
-            value={props.usersPage.searchInputText}
-            placeholder="Search users by name"
-            onChange={() => {
-              onSearchHandler();
+        {props.usersPage.isFetching?<Preloader></Preloader>:
+        <div><div className={s.pageBlock}>
+        {pages.map((page) => (
+          <span
+            className={currentPage === page ? s.selectedPage : s.page}
+            onClick={() => {
+              onPageChanged(page);
             }}
-          ></input>
-        </div>
-        <div className={s.userList}>{usersList}</div>
+          >
+            {page}
+          </span>
+        ))}
+      </div>
+      <div className={s.searchBlock}>
+        <input
+          ref={searchText}
+          value={props.usersPage.searchInputText}
+          placeholder="Search users by name"
+          onChange={() => {
+            onSearchHandler();
+          }}
+        ></input>
+      </div>
+      <div className={s.userList}>{usersList}</div>
+          </div>}
+        
       </div>
     );
   

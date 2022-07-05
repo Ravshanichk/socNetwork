@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
   followAC,
   setCurrentPageAC,
+  setFetchingAC,
   setSearchInputAC,
   setTotalUsersCountAC,
   setUsersAC,
@@ -14,6 +15,7 @@ import Users from "./Users";
 class UsersContainer extends React.Component {
   componentDidMount() {
     console.log("mountBeforeAxios");
+    this.props.setFetching(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersPage.pageSize}&page=${this.props.usersPage.currentPage}`
@@ -22,6 +24,7 @@ class UsersContainer extends React.Component {
         let users = response.data.items;
         this.props.setUsers(users);
         this.props.setTotalUsersCount(response.data.totalCount);
+        this.props.setFetching(false)
         debugger;
       });
     console.log("mountAfterAxios");
@@ -29,6 +32,7 @@ class UsersContainer extends React.Component {
 
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
+    this.props.setFetching(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersPage.pageSize}&page=${pageNumber}`
@@ -36,7 +40,7 @@ class UsersContainer extends React.Component {
       .then((response) => {
         let users = response.data.items;
         this.props.setUsers(users);
-        debugger;
+        this.props.setFetching(false);
       });
   };
 
@@ -91,6 +95,9 @@ let mapDispatchToProps = (dispatch) => {
     },
     setSearchInput: (text) => {
       dispatch(setSearchInputAC(text));
+    },
+    setFetching: (fetching) => {
+      dispatch(setFetchingAC(fetching));
     },
   };
 };
