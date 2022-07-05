@@ -16,6 +16,7 @@ let initialState = {
 }
 
 const profileReducer = (state=initialState, action) => {
+  let stateCopy
     switch(action.type){
         case ADD_POST: 
         let newPost = {
@@ -23,14 +24,17 @@ const profileReducer = (state=initialState, action) => {
           message: state.textArea,
           likeCount: 10,
         };
-        state.posts.push(newPost);
-        state.textArea = "";
-
-        return state
+        stateCopy = {
+          ...state,
+          posts: [...state.posts, newPost],
+          textArea:""
+        }
+        return stateCopy
       case ON_CHANGE_TEXT_AREA_POST:   
-      debugger  
-        state.textArea = action.body;
-        return state;
+      return {
+        ...state,
+        textArea: action.body
+      }  
     default:
             return state;
 }

@@ -22,19 +22,26 @@ let initialState ={
 }
 
 const dialogsReducer = (state=initialState, action) =>{
-
+    
+    let stateCopy;
     switch(action.type){
         case ADD_MESSAGE:
             let newMessageItem = {
                 text: state.textArea,
                 id: 6,
               };
-              state.messages.push(newMessageItem);
-              state.textArea = " ";
-              return state;
+              stateCopy={
+                ...state,
+                messages: [...state.messages, newMessageItem]
+              }
+              stateCopy.textArea = " ";
+              return stateCopy;
         case ON_CHANGE_TEXT_AREA_MESSAGE:
-            state.textArea = action.body;
-            return state;
+            stateCopy={
+                ...state,
+                textArea: action.body
+            }
+            return stateCopy;
         default:
             return state;
     }

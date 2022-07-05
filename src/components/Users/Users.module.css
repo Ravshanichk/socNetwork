@@ -1,0 +1,40 @@
+.usersBlock{
+    display: flex;
+    flex-direction: column;
+}
+
+.pageBlock{
+    display: flex;
+    justify-content:flex-start;
+    flex-wrap: wrap;
+}
+
+.searchBlock{
+    margin: 10px;
+    
+}
+.searchBlock input{
+    width: 200px;
+    height: 17px;
+    border-radius: 10px;
+    border: 1px solid rgb(219, 219, 219);
+}
+
+.page{
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.selectedPage{
+    font-weight: bolder;
+    margin-right: 5px;
+}
+
+.userList{
+    padding: 0 20px;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}

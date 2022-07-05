@@ -3,7 +3,7 @@
     display: grid;
     background: #f5f7eb;
     border-radius: 10px;
-    height: 100vh;
+    height: fit-content;
 
     
   grid-template-areas: 

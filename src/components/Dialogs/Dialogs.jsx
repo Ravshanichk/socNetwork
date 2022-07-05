@@ -6,8 +6,8 @@ import Message from "./Message/Message";
 const Dialogs = (props) => {
   debugger
   let newMessage = useRef();
-  let dialogsItems = props.state.dialogsItems.map((item) => <li><DialogUser name={item.name} id={item.id} /></li>);
-  let messages = props.state.messages.map((item) =>  <Message message={item} />);
+  let dialogsItems = props.dialogsPage.dialogsItems.map((item) => <li><DialogUser name={item.name} id={item.id} /></li>);
+  let messages = props.dialogsPage.messages.map((item) =>  <Message message={item} />);
 
   let onSendMessageClick = () => {
     props.addMessage();
@@ -30,8 +30,8 @@ const Dialogs = (props) => {
         <textarea
           ref={newMessage}
           onChange={onChangeDialogsTextarea}
-          value={props.state.textArea}
-          placeholder={props.state.placeHolder}
+          value={props.dialogsPage.textArea}
+          placeholder={props.dialogsPage.placeHolder}
         ></textarea>
         <button onClick={onSendMessageClick}>Send message</button>
       </div>
