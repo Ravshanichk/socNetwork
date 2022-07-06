@@ -77,13 +77,13 @@ const usersReducer = (state=initialState, action) =>{
     }
 }
 
-export const followAC=(userId)=>({type:FOLLOW, body: userId})
-export const unFollowAC=(userId)=>({type:UNFOLLOW, body:userId})
-export const setUsersAC=(users)=>({type: SET_USERS, body: users})
-export const setCurrentPageAC=(page) => ({type: SET_PAGE, body: page})
-export const setTotalUsersCountAC=(totalUsersCount) => ({type: SET_TOTAL_USERS, body: totalUsersCount})
-export const setSearchInputAC=(text) => ({type: SET_SEARCH_INPUT, body: text})
-export const setFetchingAC=(fetching) => ({type: SET_FETCH, fetching})
+export const followUser=(userId)=>({type:FOLLOW, body: userId})
+export const unFollowUser=(userId)=>({type:UNFOLLOW, body:userId})
+export const setUsers=(users)=>({type: SET_USERS, body: users})
+export const setCurrentPage=(page) => ({type: SET_PAGE, body: page})
+export const setTotalUsersCount=(totalUsersCount) => ({type: SET_TOTAL_USERS, body: totalUsersCount})
+export const setSearchInput=(text) => ({type: SET_SEARCH_INPUT, body: text})
+export const setFetching=(fetching) => ({type: SET_FETCH, fetching})
 
 
 export default usersReducer

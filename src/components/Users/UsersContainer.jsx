@@ -2,13 +2,13 @@ import React from "react";
 import * as axios from "axios";
 import { connect } from "react-redux";
 import {
-  followAC,
-  setCurrentPageAC,
-  setFetchingAC,
-  setSearchInputAC,
-  setTotalUsersCountAC,
-  setUsersAC,
-  unFollowAC,
+  followUser,
+  setCurrentPage,
+  setFetching,
+  setSearchInput,
+  setTotalUsersCount,
+  setUsers,
+  unFollowUser,
 } from "../../redux/userReducer";
 import Users from "./Users";
 
@@ -32,7 +32,7 @@ class UsersContainer extends React.Component {
 
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
-    this.props.setFetching(true);
+    // this.props.setFetching(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersPage.pageSize}&page=${pageNumber}`
@@ -40,7 +40,7 @@ class UsersContainer extends React.Component {
       .then((response) => {
         let users = response.data.items;
         this.props.setUsers(users);
-        this.props.setFetching(false);
+        // this.props.setFetching(false);
       });
   };
 
@@ -76,30 +76,39 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    followUser: (userId) => {
-      dispatch(followAC(userId));
-    },
-    unFollowUser: (userId) => {
-      dispatch(unFollowAC(userId));
-    },
-    setUsers: (users) => {
-      dispatch(setUsersAC(users));
-    },
-    setCurrentPage: (page) => {
-      dispatch(setCurrentPageAC(page));
-    },
-    setTotalUsersCount: (totalUsers) => {
-      dispatch(setTotalUsersCountAC(totalUsers));
-    },
-    setSearchInput: (text) => {
-      dispatch(setSearchInputAC(text));
-    },
-    setFetching: (fetching) => {
-      dispatch(setFetchingAC(fetching));
-    },
-  };
-};
+// let mapDispatchToProps = (dispatch) => {
+  // return {
+  //   followUser: (userId) => {
+  //     dispatch(followAC(userId));
+  //   },
+  //   unFollowUser: (userId) => {
+  //     dispatch(unFollowAC(userId));
+  //   },
+  //   setUsers: (users) => {
+  //     dispatch(setUsersAC(users));
+  //   },
+  //   setCurrentPage: (page) => {
+  //     dispatch(setCurrentPageAC(page));
+  //   },
+  //   setTotalUsersCount: (totalUsers) => {
+  //     dispatch(setTotalUsersCountAC(totalUsers));
+  //   },
+  //   setSearchInput: (text) => {
+  //     dispatch(setSearchInputAC(text));
+  //   },
+  //   setFetching: (fetching) => {
+  //     dispatch(setFetchingAC(fetching));
+  //   },
+  // };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {
+  followUser,
+  unFollowUser,
+  setUsers,
+  setCurrentPage ,
+  setTotalUsersCount,
+  setSearchInput,
+  setFetching,
+  },
+)(UsersContainer);
