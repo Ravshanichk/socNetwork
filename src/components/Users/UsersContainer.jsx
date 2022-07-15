@@ -8,24 +8,21 @@ import {
   setSearchInput,
   setTotalUsersCount,
   setUsers,
+  toggleFollowingProgress,
   unFollowUser,
 } from "../../redux/userReducer";
 import Users from "./Users";
+import { followApi, getUsers, searchUsers, unFollowApi } from "../../api/api";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
     console.log("mountBeforeAxios");
     this.props.setFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersPage.pageSize}&page=${this.props.usersPage.currentPage}`
-      )
-      .then((response) => {
-        let users = response.data.items;
+    getUsers(this.props.usersPage.pageSize, this.props.usersPage.currentPage).then((response) => {
+        let users = response.items;
         this.props.setUsers(users);
-        this.props.setTotalUsersCount(response.data.totalCount);
+        this.props.setTotalUsersCount(response.totalCount);
         this.props.setFetching(false)
-        debugger;
       });
     console.log("mountAfterAxios");
   }
@@ -33,38 +30,48 @@ class UsersContainer extends React.Component {
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
     // this.props.setFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersPage.pageSize}&page=${pageNumber}`
-      )
-      .then((response) => {
-        let users = response.data.items;
-        this.props.setUsers(users);
-        // this.props.setFetching(false);
-      });
+    getUsers(this.props.usersPage.pageSize, pageNumber).then(response=>{
+      let users = response.items;
+      this.props.setUsers(users);
+    })
+   
   };
 
   onSearchHandler = (text) => {
    
     this.props.setSearchInput(text);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?term=${this.props.usersPage.searchInputText}`
-      )
-      .then((response) => {
-        let users = response.data.items;
-        this.props.setUsers(users);
-      });
+    searchUsers(this.props.usersPage.searchInputText).then(response=>{
+      let users = response.items;
+      this.props.setUsers(users);
+    })
   };
+
+  onClickUnFollow =(id) => {
+    this.props.toggleFollowingProgress(true, id)
+    unFollowApi(id).then((response) => {
+        this.props.unFollowUser(id)
+        this.props.toggleFollowingProgress(false, id)
+      
+    });
+  }
+
+  onClickFollow =(id) => {
+    this.props.toggleFollowingProgress(true, id)
+   followApi(id).then((response) => {
+        this.props.followUser(id)
+        this.props.toggleFollowingProgress(false, id)
+    });
+  }
 
   render() {
     return (
       <Users
         usersPage={this.props.usersPage}
-        followUser={this.props.followUser}
-        unFollowUser={this.props.unFollowUser}
+        onClickFollow={this.onClickFollow}
+        onClickUnFollow={this.onClickUnFollow}
         onPageChanged={this.onPageChanged}
         onSearchHandler={this.onSearchHandler}
+        
       ></Users>
     );
   }
@@ -79,28 +86,29 @@ let mapStateToProps = (state) => {
 // let mapDispatchToProps = (dispatch) => {
   // return {
   //   followUser: (userId) => {
-  //     dispatch(followAC(userId));
+  //     dispatch(follow(userId));
   //   },
   //   unFollowUser: (userId) => {
-  //     dispatch(unFollowAC(userId));
+  //     dispatch(unFollow(userId));
   //   },
   //   setUsers: (users) => {
-  //     dispatch(setUsersAC(users));
+  //     dispatch(setUsers(users));
   //   },
   //   setCurrentPage: (page) => {
-  //     dispatch(setCurrentPageAC(page));
+  //     dispatch(setCurrentPage(page));
   //   },
   //   setTotalUsersCount: (totalUsers) => {
-  //     dispatch(setTotalUsersCountAC(totalUsers));
+  //     dispatch(setTotalUsersCount(totalUsers));
   //   },
   //   setSearchInput: (text) => {
-  //     dispatch(setSearchInputAC(text));
+  //     dispatch(setSearchInput(text));
   //   },
   //   setFetching: (fetching) => {
-  //     dispatch(setFetchingAC(fetching));
+  //     dispatch(setFetching(fetching));
   //   },
   // };
 // };
+
 
 export default connect(mapStateToProps, {
   followUser,
@@ -110,5 +118,6 @@ export default connect(mapStateToProps, {
   setTotalUsersCount,
   setSearchInput,
   setFetching,
+  toggleFollowingProgress
   },
 )(UsersContainer);

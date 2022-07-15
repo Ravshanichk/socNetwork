@@ -1,30 +1,36 @@
 import React from 'react'
+import Preloader from '../../common/Preloader/Preloader'
 import s from './ProfileInfo.module.css'
+import ava from '../../../assets/user_ava.png'
 
 
 
-const ProfileInfo = () =>{
+const ProfileInfo = (props) =>{
+
+    if(!props.profile){
+        return <Preloader></Preloader>
+    }else{
     return(
         <div className={s.profileInfo}>
             <div>
-                <img src='https://www.paradisehotel51.com/sin/wp-content/uploads/2022/04/Hatoba.png' alt='ava'></img>
+                <img src={props.profile.photos.large?props.profile.photos.large:ava} alt='ava'></img>
             </div>
             <ul>
                 <li>
-                    Name:
+                   Full name: {props.profile.fullName}
                 </li>
                 <li>
-                    city:
+                   Status: {props.profile.aboutMe}
                 </li>
                 <li>
-                    age:
+                facebook: {props.profile.contacts.facebook}
                 </li>
                 <li>
-                    stack:
                 </li>
             </ul>
         </div>
     )
+    }
 }
 
 export default ProfileInfo

@@ -4,7 +4,6 @@ import DialogUser from "./DialogUser/DialogUser";
 import Message from "./Message/Message";
 
 const Dialogs = (props) => {
-  debugger
   let newMessage = useRef();
   let dialogsItems = props.dialogsPage.dialogsItems.map((item) => <li><DialogUser name={item.name} id={item.id} /></li>);
   let messages = props.dialogsPage.messages.map((item) =>  <Message message={item} />);
